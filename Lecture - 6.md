@@ -162,3 +162,83 @@ All the best for your exam!
 
 ---
 
+### 4-Bit Universal / General Purpose Register (Most Important Diagram in COA for 8–10 Marks Question)
+
+This is a **multi-function register** (also called Universal Shift Register or General Purpose Shift Register) that can perform **four different operations** depending on two select lines S1 and S0.
+
+It is one of the most frequently asked **long-answer questions** in university exams (VTU, Anna University, Mumbai University, Pune University, JNTU, etc.).
+
+#### Truth Table (Memorize This – 99% Exams Ask This)
+
+| S1 | S0 | Operation Performed                  | What Happens Inside the Register |
+|----|----|--------------------------------------|-----------------------------------|
+| 0  | 0  | No Change / Hold / Remain Same       | Q₃Q₂Q₁Q₀ stays same               |
+| 0  | 1  | Shift Right                          | Bits move → right                 |
+| 1  | 0  | Shift Left                           | Bits move ← left                  |
+| 1  | 1  | Parallel Load (Load new 4-bit data)  | New data from I₃I₂I₁I₀ loaded     |
+
+#### Detailed Working of Each Mode
+
+| Mode              | Serial Input Used? | Parallel Inputs Used? | Example (Assume current Q = 1011) |
+|-------------------|--------------------|-----------------------|-------------------------------------|
+| **00 – Hold**     | No                 | No                    | Next state → 1011 (no change)    |
+| **01 – Shift Right** | Yes (R = right serial input) | No              | If R=0 → 0101<br>If R=1 → 1101      |
+| **10 – Shift Left**  | Yes (L = left serial input)  | No              | If L=0 → 0110<br>If L=1 → 1110      |
+| **11 – Parallel Load** | No               | Yes (I₃I₂I₁I₀)        | Directly becomes I₃I₂I₁I₀ (e.g., 1100) |
+
+#### How the Circuit Works (Block Diagram Explanation)
+
+The register is made of **4 D flip-flops** (Q₃, Q₂, Q₁, Q₀).  
+A **4×1 MUX** in front of each D input decides what will go into the flip-flop on the next clock pulse.
+
+For each bit:
+- MUX input 0 → current Q (for hold)
+- MUX input 1 → Q from right neighbour (for shift right)
+- MUX input 2 → Q from left neighbour (for shift left)
+- MUX input 3 → external parallel input Iₙ (for parallel load)
+
+S1 S0 selects which of the 4 inputs goes to D.
+
+#### Exam-Style Questions & Perfect Answers
+
+1. **Draw and explain the block diagram of a 4-bit universal shift register.**  
+   → Draw the second image (with 4 boxes labeled S, inputs R and L, outputs Q₃–Q₀, CLK, CLR) + write the truth table.
+
+2. **With neat diagram explain the operation of universal shift register.**  
+   → Explain all 4 modes with one example each.
+
+3. **What is the difference between serial and parallel loading in shift register?**  
+   | Serial Loading       | Parallel Loading         |
+   |-------------------------|--------------------------|
+   | One bit at a time       | All 4 bits at once       |
+   | Takes 4 clock pulses    | Takes only 1 clock pulse |
+   | Used in communication   | Used in CPU registers    |
+
+4. **How many clock pulses are required to load 1010 using shift right if initially register is 0000 and right serial input is connected to 1 and then 0s?**  
+   → 4 clock pulses (bit by bit from right)
+
+5. **Can this register perform the function of:**  
+   a) SISO → Yes (shift right or left)  
+   b) SIPO → Yes (shift + read parallel output)  
+   c) PISO → Yes (parallel load + shift out serially)  
+   d) PIPO → Yes (parallel load + parallel output)  
+   → That’s why it is called **Universal Shift Register**
+
+#### Quick Revision Table (Write This in Exam)
+
+| S1 S0 | Mode            | Input Used         | Direction | Application                      |
+|-------|-----------------|--------------------|-----------|----------------------------------|
+| 00    | Hold            | None               | —         | Temporary storage                |
+| 01    | Shift Right     | Right serial (R)   | →         | Serial data reception            |
+| 10    | Shift Left      | Left serial (L)    | ←         | Multiplication by 2 (logic)      |
+| 11    | Parallel Load   | I₃ I₂ I₁ I₀        | —         | Fast loading from data bus       |
+
+#### One-Line Summary for Viva
+“A 4-bit universal shift register is a multifunctional register that can hold data, shift left, shift right, or load parallel data depending on the values of select lines S1 and S0.”
+
+**Pro Tip:** In exam, always draw the block diagram with 4 flip-flops + 4 MUXes, label R, L, CLK, CLR, Q₃–Q₀, and write the truth table → guaranteed full 8–10 marks.
+
+You are now 100% ready for this question! All the best! 🚀
+
+---
+
